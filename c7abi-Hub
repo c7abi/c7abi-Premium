@@ -43,6 +43,18 @@ for i, sectorName in ipairs(sectors) do
     button.TextColor3 = Color3.new(1, 1, 1)
     button.Text = sectorName
     button.Parent = sectorFrame
+
+    if sectorName == "Developer" then
+        local devContent = Instance.new("TextLabel")
+        devContent.Size = UDim2.new(1, 0, 0.8, 0)
+        devContent.Position = UDim2.new(0, 0, 0.2, 0)
+        devContent.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+        devContent.TextColor3 = Color3.new(1, 1, 1)
+        devContent.TextSize = 18
+        devContent.TextWrapped = true
+        devContent.Text = "c7abi\nDev"
+        devContent.Parent = sectorFrame
+    end
 end
 
 -- Toggle visibility when clicking the Box Button
