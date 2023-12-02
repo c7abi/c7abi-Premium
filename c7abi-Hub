@@ -5,14 +5,14 @@ local gui = Instance.new("ScreenGui")
 gui.Name = "ExampleGui"
 gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Create Frame for the GUI
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0.3, 0, 0.5, 0)
-frame.Position = UDim2.new(0.5, 0, 0.5, 0)
-frame.AnchorPoint = Vector2.new(0.5, 0.5)
-frame.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
-frame.BorderSizePixel = 5
-frame.Parent = gui
+-- Create Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0.3, 0, 0.5, 0)
+mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+mainFrame.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
+mainFrame.BorderSizePixel = 5
+mainFrame.Parent = gui
 
 -- Create Box Button with the number 7
 local boxButton = Instance.new("TextButton")
@@ -21,17 +21,29 @@ boxButton.BackgroundColor3 = Color3.new(0, 0, 1)  -- Blue color
 boxButton.TextColor3 = Color3.new(1, 1, 1)
 boxButton.TextSize = 24
 boxButton.Text = "7"
-boxButton.Parent = frame
+boxButton.Parent = mainFrame
 
--- Create buttons for different sectors
+-- Create Sector Frame
+local sectorFrame = Instance.new("Frame")
+sectorFrame.Size = UDim2.new(1, 0, 0.8, 0)
+sectorFrame.Position = UDim2.new(0, 0, 0.2, 0)
+sectorFrame.Parent = mainFrame
+sectorFrame.Visible = false  -- Initially hidden
+
+-- Create buttons for different sectors within Sector Frame
 local sectors = {"Developer", "Main", "Sea Events", "Items", "Misc"}
 
 for i, sectorName in ipairs(sectors) do
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(1, 0, 0.2, 0)
-    button.Position = UDim2.new(0, 0, (i - 1) * 0.2 + 0.2, 0)
+    button.Position = UDim2.new(0, 0, (i - 1) * 0.2, 0)
     button.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
     button.TextColor3 = Color3.new(1, 1, 1)
     button.Text = sectorName
-    button.Parent = frame
+    button.Parent = sectorFrame
 end
+
+-- Toggle visibility when clicking the Box Button
+boxButton.MouseButton1Click:Connect(function()
+    sectorFrame.Visible = not sectorFrame.Visible
+end)
